@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Test\GSU\D2L\API;
 
-use GSU\D2L\API\APIConfig;
+use GSU\D2L\API\D2LAPIConfig;
 
-class TestConfig extends APIConfig
+class TestConfig extends D2LAPIConfig
 {
     public const D2L_HOST                   = 'https://my.lms';
     public const D2L_USER                   = 'test_user';

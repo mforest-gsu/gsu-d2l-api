@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
-use GSU\D2L\API\APIConfig;
+use GSU\D2L\API\D2LAPIConfig;
 use GSU\D2L\API\Users\UsersAPI;
 use Test\GSU\D2L\API\TestEnv;
 
 include __DIR__ . '/../../vendor/autoload.php';
 
 $env = new TestEnv(
-    APIConfig::create(include(__DIR__ . '/config.test.php')),
+    D2LAPIConfig::create(include(__DIR__ . '/config.example.php')),
     new Client()
 );
 

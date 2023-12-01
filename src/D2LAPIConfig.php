@@ -8,7 +8,7 @@ use mjfklib\Container\ArrayValue;
 use mjfklib\Container\Env;
 use mjfklib\Container\ObjectFactory;
 
-class APIConfig
+class D2LAPIConfig
 {
     public const D2L_HOST = 'D2L_HOST';
     public const D2L_USER = 'D2L_USER';

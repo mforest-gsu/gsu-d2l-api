@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Core;
 
-use GSU\D2L\API\APIConfig;
+use GSU\D2L\API\D2LAPIConfig;
 use GSU\D2L\API\Auth\LoginTokenStore;
 use GSU\D2L\API\Auth\OAuthTokenStore;
-use mjfklib\HttpClient\APIClient;
+use mjfklib\HttpClient\HttpAPIClient;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
-class D2LAPIClient extends APIClient
+class D2LAPIClient extends HttpAPIClient
 {
     /**
-     * @param APIConfig $config
+     * @param D2LAPIConfig $config
      * @param LoginTokenStore $loginTokenStore
      * @param OAuthTokenStore $oauthTokenStore
      * @param RequestFactoryInterface $requestFactory
      * @param ClientInterface $client
      */
     public function __construct(
-        protected APIConfig $config,
+        protected D2LAPIConfig $config,
         protected LoginTokenStore $loginTokenStore,
         protected OAuthTokenStore $oauthTokenStore,
         RequestFactoryInterface $requestFactory,

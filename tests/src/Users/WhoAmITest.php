@@ -135,14 +135,14 @@ final class WhoAmITest extends TestCase
     }
 
 
-    // /**
-    //  * @return void
-    //  */
-    // public function testTooManyRequestsException(): void
-    // {
-    //     $this->setResponse(new Response(429));
-    //     $this->expectException(HttpException::class); // TooManyRequestsException::class
-    //     $this->api->whoami();
-    //     self::fail();
-    // }
+    /**
+     * @return void
+     */
+    public function testTooManyRequestsException(): void
+    {
+        $this->setResponse(new Response(429));
+        $this->expectException(TooManyRequestsException::class);
+        $this->api->whoami();
+        self::fail();
+    }
 }

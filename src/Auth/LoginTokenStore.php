@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Auth;
 
-use GSU\D2L\API\Auth\D2LAuthAPI;
-use GSU\D2L\API\APIConfig;
+use GSU\D2L\API\Auth\D2LAuthAPIClient;
+use GSU\D2L\API\D2LAPIConfig;
 
 class LoginTokenStore
 {
@@ -13,12 +13,12 @@ class LoginTokenStore
 
 
     /**
-     * @param APIConfig $config
-     * @param D2LAuthAPI $authAPI
+     * @param D2LAPIConfig $config
+     * @param D2LAuthAPIClient $authAPI
      */
     public function __construct(
-        protected APIConfig $config,
-        protected D2LAuthAPI $authAPI
+        protected D2LAPIConfig $config,
+        protected D2LAuthAPIClient $authAPI
     ) {
     }
 

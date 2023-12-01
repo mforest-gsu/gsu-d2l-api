@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Auth;
 
-use GSU\D2L\API\APIConfig;
-use mjfklib\HttpClient\APIClient;
+use GSU\D2L\API\D2LAPIConfig;
+use mjfklib\HttpClient\HttpAPIClient;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\UriInterface;
 
-class D2LAuthAPI extends APIClient
+class D2LAuthAPIClient extends HttpAPIClient
 {
     public const D2L_LOGIN_URI       = '/d2l/lp/auth/login/login.d2l';
     public const D2L_HOME_URI        = '/d2l/home';
@@ -20,12 +20,12 @@ class D2LAuthAPI extends APIClient
 
 
     /**
-     * @param APIConfig $config
+     * @param D2LAPIConfig $config
      * @param RequestFactoryInterface $requestFactory
      * @param ClientInterface $client
      */
     public function __construct(
-        protected APIConfig $config,
+        protected D2LAPIConfig $config,
         RequestFactoryInterface $requestFactory,
         ClientInterface $client,
     ) {
