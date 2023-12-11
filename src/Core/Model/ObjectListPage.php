@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Core\Model;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 /**
  * @template T
@@ -21,23 +20,7 @@ class ObjectListPage
         mixed $values,
         callable $castObject
     ): self {
-        return ObjectFactory::createObject(
-            $values,
-            self::class,
-            fn (array $values): self => self::construct($values, $castObject)
-        );
-    }
-
-
-    /**
-     * @param mixed[] $values
-     * @param (callable(mixed $v): T) $castObject
-     * @return self<T>
-     */
-    public static function construct(
-        array $values,
-        callable $castObject
-    ): self {
+        $values = ArrayValue::convertToArray($values);
         return new self(
             Next: ArrayValue::getStringNull($values, 'PagingInfo'),
             Objects: array_map(

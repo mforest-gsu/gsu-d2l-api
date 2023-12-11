@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Auth;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 class OAuthToken
 {
@@ -15,16 +14,7 @@ class OAuthToken
      */
     public static function create(mixed $values): self
     {
-        return ObjectFactory::createObject($values, self::class, [self::class, 'construct']);
-    }
-
-
-    /**
-     * @param mixed[] $values
-     * @return self
-     */
-    public static function construct(array $values): self
-    {
+        $values = ArrayValue::convertToArray($values);
         return new self(
             access_token: ArrayValue::getString($values, 'access_token'),
             scope: ArrayValue::getString($values, 'scope'),

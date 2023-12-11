@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\DataHub\Model;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 class BDSExtractInfo implements \JsonSerializable
 {
@@ -15,7 +14,8 @@ class BDSExtractInfo implements \JsonSerializable
      */
     public static function create(mixed $values): self
     {
-        return ObjectFactory::createObject($values, self::class, fn (array $values): self => new self(
+        $values = ArrayValue::convertToArray($values);
+        return new self(
             SchemaId: ArrayValue::getString($values, 'SchemaId'),
             PluginId: ArrayValue::getString($values, 'PluginId'),
             BdsType: ArrayValue::getString($values, 'BdsType'),
@@ -24,7 +24,7 @@ class BDSExtractInfo implements \JsonSerializable
             DownloadLink: ArrayValue::getString($values, 'DownloadLink'),
             QueuedForProcessingDate: ArrayValue::getDateTime($values, 'QueuedForProcessingDate'),
             Version: ArrayValue::getString($values, 'Version'),
-        ));
+        );
     }
 
 

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Outcomes\Model;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 class OutcomeRegistry
 {
@@ -15,16 +14,7 @@ class OutcomeRegistry
      */
     public static function create(mixed $values): self
     {
-        return ObjectFactory::createObject($values, self::class, [self::class, 'construct']);
-    }
-
-
-    /**
-     * @param mixed[] $values
-     * @return self
-     */
-    public static function construct(array $values): self
-    {
+        $values = ArrayValue::convertToArray($values);
         return new self(
             id: ArrayValue::getString($values, 'id'),
             objectives: array_values(array_map(

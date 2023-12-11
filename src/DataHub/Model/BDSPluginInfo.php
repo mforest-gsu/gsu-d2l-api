@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\DataHub\Model;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 class BDSPluginInfo
 {
@@ -15,21 +14,19 @@ class BDSPluginInfo
      */
     public static function create(mixed $values): self
     {
-        return ObjectFactory::createObject($values, self::class, fn (array $values): self => new self(
+        $values = ArrayValue::convertToArray($values);
+        return new self(
             PluginId: ArrayValue::getString($values, 'PluginId'),
             Name: ArrayValue::getString($values, 'Name'),
             Description: ArrayValue::getString($values, 'Description'),
             ExtractsLink: ArrayValue::getString($values, 'ExtractsLink'),
             Extracts: !is_null($values['Extracts'] ?? null)
                 ? array_map(
-                    fn (object|array $v): BDSExtractInfo => BDSExtractInfo::create($v),
-                    array_filter(
-                        ArrayValue::getArray($values, 'Extracts'),
-                        fn (mixed $v): bool => is_object($v) || is_array($v)
-                    )
+                    fn (mixed $v): BDSExtractInfo => BDSExtractInfo::create($v),
+                    ArrayValue::getArray($values, 'Extracts')
                 ) :
                 []
-        ));
+        );
     }
 
 

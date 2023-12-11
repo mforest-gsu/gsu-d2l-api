@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API;
 
-use mjfklib\Container\ArrayValue;
+use mjfklib\Utils\ArrayValue;
 use mjfklib\Container\Env;
-use mjfklib\Container\ObjectFactory;
 
 class D2LAPIConfig
 {
@@ -38,8 +37,8 @@ class D2LAPIConfig
      */
     public static function create(mixed $values): self
     {
-        if ($values instanceof Env) {
-            $values = [
+        $values = ($values instanceof Env)
+            ? [
                 'd2lHost' => $values[self::D2L_HOST] ?? '',
                 'd2lUser' => $values[self::D2L_USER] ?? '',
                 'd2lPass' => $values[self::D2L_PASS] ?? '',
@@ -53,19 +52,9 @@ class D2LAPIConfig
                 'oauthScope' => $values[self::D2L_OAUTH_SCOPE] ?? '',
                 'oauthAuthCodeURL' => $values[self::D2L_OAUTH_AUTH_CODE_URL] ?? null,
                 'oauthAccessTokenURL' => $values[self::D2L_OAUTH_ACCESS_TOKEN_URL] ?? null,
-            ];
-        }
+            ]
+            : ArrayValue::convertToArray($values);
 
-        return ObjectFactory::createObject($values, self::class, [self::class, 'construct']);
-    }
-
-
-    /**
-     * @param mixed[] $values
-     * @return self
-     */
-    public static function construct(array $values): self
-    {
         return new self(
             d2lHost: ArrayValue::getString($values, 'd2lHost'),
             d2lUser: ArrayValue::getString($values, 'd2lUser'),

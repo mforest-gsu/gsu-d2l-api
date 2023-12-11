@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GSU\D2L\API\Auth;
 
-use mjfklib\Container\ArrayValue;
-use mjfklib\Container\ObjectFactory;
+use mjfklib\Utils\ArrayValue;
 
 class LoginToken
 {
@@ -15,16 +14,7 @@ class LoginToken
      */
     public static function create(mixed $values): self
     {
-        return ObjectFactory::createObject($values, self::class, [self::class, 'construct']);
-    }
-
-
-    /**
-     * @param mixed[] $values
-     * @return self
-     */
-    public static function construct(array $values): self
-    {
+        $values = ArrayValue::convertToArray($values);
         return new self(
             token: ArrayValue::getString($values, 'token'),
             expires_on: ArrayValue::getInt($values, 'expires_on')
